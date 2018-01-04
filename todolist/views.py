@@ -16,7 +16,7 @@ def list_view(request, pk):
     todo_list = ToDoList.objects.get(pk=pk)
     todo_list_name = ToDoList.objects.get(pk=pk)
     todo_list = todo_list.id
-    tasks = Task.objects.filter(todo_list=pk).order_by('name')
+    tasks = Task.objects.filter(todo_list=pk).order_by('task_done')
     return render(request, 'todolist/task_list.html', {'tasks': tasks, 'todo_list': todo_list, 'todo_list_name': todo_list_name})
 
 def todo_list_new(request):
