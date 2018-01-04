@@ -1,0 +1,74 @@
+{% extends 'todolist/base.html' %}
+
+{% block header %}
+<h1><a href="/">{{ todo_list_name }}</a><a href="{% url 'todo_list_new' %}" class="top-menu"><i class="fas fa-plus"></i></a></h1>
+{% endblock %}
+
+{% block content %}
+<div class="task-helper">
+  <a href="{% url 'create_task' pk=todo_list %}"><i class="fas fa-plus fa-xs"></i></a>
+</div>
+  {% for task in tasks %}
+    <div class="tasks">
+      <li class="list-group-item">
+          {% if task.task_done is True %}
+          <a class="task-name task-done" data-id="{{ task.id }}" href="">{{ task.name }}</a>
+          {% else %}
+          <a class="task-name" data-id="{{ task.id }}" href="">{{ task.name }}</a>
+          {% endif %}
+
+            <a href="{% url 'remove_task' pk=task.id %}"><i class="fas fa-times fa-xs"></i></a>
+            <a href ="" class ="task-do" data-id="{{ task.id }}"><i class="fas fa-check fa-xs"></i></a>
+
+        </li>
+
+    </div>
+  {% endfor %}
+    <script type="text/javascript">
+    $(document).ready(function() {
+        function getCookie(name) {
+            var cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                var cookies = document.cookie.split(';');
+                for (var i = 0; i < cookies.length; i++) {
+                    var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+var csrftoken = getCookie('csrftoken');
+
+        function csrfSafeMethod(method) {
+    // these HTTP methods do not require CSRF protection
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+}
+        $.ajaxSetup({
+    beforeSend: function(xhr, settings) {
+        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+        }
+    }
+});
+        $('.task-do').each(function() {
+            $(this).on('click', function(event) {
+                var cmd = {
+                    "csrfmiddlewaretoken": csrftoken,
+                    "taskId": []
+             };
+                var taskId = $(this).attr('data-id');
+                cmd.taskId.push(taskId);
+                cmd = JSON.stringify(cmd);
+                $.post('/done-task/', cmd, function() {
+                    taskName = $(event.target).siblings();
+                    taskName.addClass('task-done');
+                })
+            })
+        })
+    })
+    </script>
+{% endblock %}

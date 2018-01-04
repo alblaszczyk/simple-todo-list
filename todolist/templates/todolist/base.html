@@ -1,0 +1,26 @@
+{% load staticfiles %}
+<html>
+    <head>
+        <title>this shit's in progress yo</title>
+        <script defer src="https://use.fontawesome.com/releases/v5.0.1/js/all.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Josefin+Slab" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="{% static 'css/todolist.css' %}">
+    </head>
+    <body>
+      <div class="page-header">
+            {% block header %}
+            {% endblock %}
+      </div>
+      <div class="row">
+        <div class="col-sm-8">
+          <ul class="list-group">
+            {% block content %}
+            {% endblock %}
+          </ul>
+        </div>
+      </div>
+    </body>
+</html>

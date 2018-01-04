@@ -1,0 +1,16 @@
+{% extends 'todolist/base.html' %}
+
+{% block header %}
+<h1><a href="/">simple todo list(s)</a><a href="{% url 'todo_list_new' %}" class="top-menu"><i class="fas fa-plus"></i></a></h1>
+{% endblock %}
+
+{% block content %}
+  {% for todo_list in todo_lists %}
+    <div class="todo-list">
+      <li class="list-group-item">
+        <a href="{% url 'list_view' pk=todo_list.pk %}">{{ todo_list.name }}</a>
+        <a href="{% url 'todo_list_remove' pk=todo_list.pk %}"><i class="fas fa-times fa-xs"></i></a>
+      </li>
+    </div>
+  {% endfor %}
+{% endblock %}

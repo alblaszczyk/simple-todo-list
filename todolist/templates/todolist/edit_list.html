@@ -1,0 +1,10 @@
+{% extends 'todolist/base.html' %}
+
+{% block header %}<a href="/"><h1>new TODO list</h1></a>{% endblock %}
+
+{% block content %}
+    <form method="POST" class="list-form">{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="save btn btn-default">add</button>
+    </form>
+{% endblock %}
