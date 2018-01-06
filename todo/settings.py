@@ -119,3 +119,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# user stuff
+
+ACCOUNT_ACTIVATION_DAYS = 7 # One-week activation window; you may, of course, use a different value.
+EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'

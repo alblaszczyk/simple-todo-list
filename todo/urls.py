@@ -13,7 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
+from django.conf.urls import url, include
 from django.contrib import admin
 from todolist.views import main_view, list_view, todo_list_new, todo_list_remove, create_task, remove_task, task_do, done_task
 
@@ -27,5 +27,6 @@ urlpatterns = [
     url(r'^remove/task/(?P<pk>\d+)/$', remove_task, name='remove_task'),
     url(r'^do/task/(?P<pk>\d+)/$', task_do, name='task_do'),
     url(r'^done-task/$', done_task, name='done_task'),
-
+    url(r'^accounts/', include('registration.backends.hmac.urls')),
+    url(r'^accounts/', include('registration.backends.simple.urls')),
 ]
