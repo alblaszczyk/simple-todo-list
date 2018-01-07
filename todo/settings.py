@@ -124,3 +124,4 @@ STATIC_URL = '/static/'
 
 ACCOUNT_ACTIVATION_DAYS = 7 # One-week activation window; you may, of course, use a different value.
 EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
+LOGIN_REDIRECT_URL = ('..')
