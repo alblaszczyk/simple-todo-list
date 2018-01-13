@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 class ToDoList(models.Model):
     name = models.CharField(max_length=200)
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='todo_lists')
 
     def __str__(self):
         return '%s' % (self.name)

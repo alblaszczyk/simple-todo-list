@@ -4,6 +4,7 @@ from todolist.forms import ToDoListForm, TaskForm
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 import json
 
 
@@ -23,10 +24,12 @@ def list_view(request, pk):
 
 @login_required
 def todo_list_new(request):
+    user = User.objects.get(id=request.user.id)
     if request.method == "POST":
         form = ToDoListForm(request.POST)
         if form.is_valid():
-            todo_list = form.save()
+            todo_list = form.save(commit=False)
+            todo_list.user = user
             todo_list.save()
             return redirect('list_view', pk=todo_list.pk)
     else:

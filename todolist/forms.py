@@ -6,10 +6,10 @@ class ToDoListForm(forms.ModelForm):
 
     class Meta:
         model = ToDoList
-        fields = '__all__'
+        fields = ('name',)
 
 class TaskForm(forms.ModelForm):
 
     class Meta:
         model = Task
-        fields = ('name',)    
+        fields = ('name',)
