@@ -78,8 +78,8 @@ WSGI_APPLICATION = 'todo.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'djangogirls',
-        'USER': 'name',
+        'NAME': 'todolistapp',
+        'USER': 'alblaszczyk',
         'PASSWORD': '',
         'HOST': 'localhost',
         'PORT': '',
